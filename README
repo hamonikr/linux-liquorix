@@ -16,3 +16,55 @@ several of them using the Restructured Text markup notation.
 Please read the Documentation/process/changes.rst file, as it contains the
 requirements for building and running the kernel, and information about
 the problems which may result by upgrading your kernel.
+
+### LIQUORIX KERNEL on HamoniKR 6.0
+
+데스크톱 및 게임에 더 적합하게 수정된 커널
+
+* upstream : https://liquorix.net/
+
+### Patched
+- CONFIG_FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER=n
+- ASUS S5402ZA keyboard not working (https://gist.github.com/chaeya/bc3297528ae7ca7c7bfaa4866f4e8486)
+
+### how to build on HamoniKR 6.0
+
+#### install require packages
+```
+sudo apt install -y build-essential libssl-dev libncurses5-dev gcc bc bison flex libelf-dev zstd
+```
+
+#### patch somethings
+```
+mv linux-liquorix linux-liquorix-5.19
+cd linux-liquorix-5.19
+patch -p1 < ../fix-asus-s5402za-keyboard.patch
+```
+#### build
+```
+dpkg-buildpackage -T clean
+dpkg-buildpackage
+```
+
+### if you want to build from original kernel source, read as below
+```
+mkdir mykernel and cd mykernel and place the linux-x.xx.x here.
+
+mkdir linux_kernel
+
+tar xvf linux-* -C linux_kernel/ --strip-components=1
+
+cd linux_kernel
+
+cp /boot/config-$(uname -r) ./.config
+
+sudo make -j$(nproc) deb-pkg
+```
+
+데비안 패키지 빌드에 필요한 인증키 를 요구하면 다음과 같이 커널 패키지 소스를 받아서 그 안의 키를 복사
+
+```
+sudo apt install -y linux-source 
+
+cp -v /usr/src/linux-source-5.15.0/debian/*.pem debian/
+```
