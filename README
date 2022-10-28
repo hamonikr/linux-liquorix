@@ -23,6 +23,11 @@ the problems which may result by upgrading your kernel.
 
 * upstream : https://liquorix.net/
 
+### Install
+```
+sudo apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
+```
+
 ### Patched
 - CONFIG_FRAMEBUFFER_CONSOLE_DEFERRED_TAKEOVER=n
 - ASUS S5402ZA keyboard not working (https://gist.github.com/chaeya/bc3297528ae7ca7c7bfaa4866f4e8486)
