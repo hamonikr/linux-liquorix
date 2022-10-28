@@ -25,6 +25,9 @@ the problems which may result by upgrading your kernel.
 
 ### Install
 ```
+# if you use other ubuntu base distro
+wget -qO- https://update.hamonikr.org/add-update-repo.apt | sudo -E bash 
+
 sudo apt-get install linux-image-liquorix-amd64 linux-headers-liquorix-amd64
 ```
 
